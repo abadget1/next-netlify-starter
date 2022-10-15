@@ -50,6 +50,7 @@ export default function Layout({
     fetchCart();
   }, []);
 
+  // console.log(children)
   return (
     <React.Fragment>
       <Head>

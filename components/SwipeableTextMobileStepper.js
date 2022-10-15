@@ -10,6 +10,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { useStyles } from '../utils/styles';
+import Image from 'next/image';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -38,9 +39,9 @@ function SwipeableTextMobileStepper(props) {
           <div key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
-                component="img"
+                component={"img"}
                 sx={{
-                  height: '100%',
+                  height: '80%',
                   display: 'block',
                   maxWidth: '100%',
                   overflow: 'hidden',

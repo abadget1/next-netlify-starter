@@ -35,8 +35,9 @@ export const theme = createMuiTheme({
       main: '#f04000',
     },
     background: {
-      color: "white",
+      color: "black",
       default: 'black',
+
     },
   },
 });
@@ -59,6 +60,7 @@ export const useStyles = makeStyles((theme) => ({
   main: {
     padding: '1rem',
     color: "white",
+    backgroundColor: 'black',
 
   },
   largeImage: {
