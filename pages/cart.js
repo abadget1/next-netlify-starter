@@ -111,7 +111,7 @@ function Cart(props) {
                               </a>
                           </TableCell>
                           <TableCell align="center">
-                            <h4>${cartItem.price.raw}</h4>                          </TableCell>
+                            <h4>{cartItem.price.formatted_with_symbol}</h4>                          </TableCell>
                           <TableCell align="center">
                             <Select
                               labelId="quanitity-label"

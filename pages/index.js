@@ -61,7 +61,7 @@ export default function Home(props) {
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
-  console.log(state)
+
   useEffect(() => {
     const fetchCart = async () => {
       dispatch({ type: CART_RETRIEVE_REQUEST });

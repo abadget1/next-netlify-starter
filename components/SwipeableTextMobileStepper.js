@@ -41,11 +41,12 @@ function SwipeableTextMobileStepper(props) {
               <Box
                 component={"img"}
                 sx={{
-                  height: '80%',
                   display: 'block',
                   maxWidth: '100%',
+                  maxHeight: '600px',
                   overflow: 'hidden',
-                  width: '100%',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
                 }}
                 src={step.url}
                 alt={step.id}
