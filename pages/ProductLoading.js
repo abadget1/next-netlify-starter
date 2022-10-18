@@ -13,7 +13,7 @@ import {
   whiteColor,
   title
 } from "/styles/jss/nextjs-material-kit-pro.js";
-import Logo from '/Users/aaron/next-netlify-starter/images/Logo.png'
+import Logo from '/images/Logo.png'
 import Layout from "@components/Layout";
 import { Skeleton } from "@material-ui/lab";
 import GridItem from "@components/Grid/GridItem";
