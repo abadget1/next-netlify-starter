@@ -21,7 +21,7 @@ import ShoppingCartSharp from "@material-ui/icons/ShoppingCartSharp";
 import styles from "/styles/jss/nextjs-material-kit-pro/components/headerStyle.js";
 import logo from "/images/Logo.png"
 import { Store } from "../Store";
-import { Badge } from "@material-ui/core";
+import { Badge, LinearProgress } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
@@ -31,6 +31,7 @@ export default function Header(props) {
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const classes = useStyles();
+  
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
       window.addEventListener("scroll", headerColorChange);
@@ -72,72 +73,76 @@ export default function Header(props) {
     [classes.fixed]: fixed
   });
   return (
+    <>
+    {/* {cart.loading || cart === undefined ? (<LinearProgress color="secondary" 
+    // style={{marginTop: "-20px" }}
+    />) : <></>} */}
     <AppBar className={appBarClasses} >
       <Toolbar className={classes.container} >
         <Button className={classes.title}>
-          <Link href="/">
-            {/* <a>{brand}</a> */}
-            <Image src={logo} width="125px" height="75%" alt="name"/>
+          <Link href="/shop">
+            <Image src={logo} width="130px" height="75%" alt="name"/>
           </Link>
         </Button>
         <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>
         </Hidden>
-        <Hidden mdUp>
+        <Hidden mdUp className={classes.hidden}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerToggle}
           >
-            <Menu />
+            {/* <Menu /> */}
+            {cart.data && cart.loading ? (
+              <>
+                <Menu/>
+              </>
+            ) : cart.data !== undefined ? (
+                <Badge badgeContent={cart.data.total_items} color="secondary">
+                  <Menu/>
+                </Badge>
+            ) : (
+              <>
+                <Menu/>  
+              </>
+            )}          
           </IconButton>
+        </Hidden>        
+        <Hidden mdUp implementation="js">
+          <Drawer
+            variant="temporary"
+            anchor={"right"}
+            open={mobileOpen}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            onClose={handleDrawerToggle}
+          >
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+              className={classes.closeButtonDrawer}
+            >
+              <Close />
+            </IconButton>
+            <div className={classes.appResponsive}>{links}</div>
+          </Drawer>
+    
         </Hidden>
       </Toolbar>
-      <Hidden mdUp implementation="js">
-        <Drawer
-          variant="temporary"
-          anchor={"right"}
-          open={mobileOpen}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-          onClose={handleDrawerToggle}
-        >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerToggle}
-            className={classes.closeButtonDrawer}
-          >
-            <Close />
-          </IconButton>
-          <div className={classes.appResponsive}>{links}</div>
-        </Drawer>
-        {cart.data && cart.loading ? (
-          <>
-            <Button simple style={{color: 'white'}} >
-              <ShoppingCartSharp/>  
-            </Button>
-          </>
-        ) : cart.data !== undefined ? (
-          <Button simple style={{color: 'white'}} href='/cart'>
-            <Badge badgeContent={cart.data.total_items} color="secondary">
-              <ShoppingCartSharp/>  
-            </Badge>
-          </Button>
-        ) : (
-          <>
-          <Button simple style={{color: 'white'}} >
-          <ShoppingCartSharp/>  
-          </Button>          </>
-            )}
-      </Hidden>
     </AppBar>
+    {cart.loading || cart === undefined ? (<LinearProgress color="secondary" 
+    style={{marginTop: "-20px" }}
+    />) : <></>}
+
+    </>
   );
 }
 
 Header.defaultProp = {
-  color: "dark"
+  color: "transparent"
 };
 
 Header.propTypes = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 // import {
 //   Box,
@@ -10,7 +10,7 @@ import Link from 'next/link';
 //   Slide,
 //   Typography,
 // } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { Alert, Skeleton } from '@material-ui/lab';
 import Layout from '../components/Layout';
 import {commerce} from '../utils/commerce';
 // import Grid, { Slide, Tooltip } from '@material-ui/core'
@@ -38,145 +38,79 @@ import CardBody from "../components/Card/CardBody.js";
 import CardFooter from "../components/Card/CardFooter.js";
 import Button from "../components/CustomButtons/Button.js";
 // import Clearfix from "../components/Clearfix/Clearfix.js";
-import { makeStyles } from '@material-ui/styles';
+
 import styles from "/styles/jss/nextjs-material-kit-pro/pages/ecommerceSections/productsStyle.js";
 
 // import Tooltip from "@material-ui/core/Tooltip";
-import { LinearProgress, Typography } from '@material-ui/core';
+import { Box, CircularProgress, ThemeProvider, Container, CssBaseline, LinearProgress, Typography } from '@material-ui/core';
 
 import { useContext, useState } from 'react';
-// import { useStyles } from '../../utils/styles';
+import { useStyles } from '/utils/styles';
 import { Store } from '/components/Store';
-import { CART_RETRIEVE_SUCCESS } from '/utils/constants';
+import {
+  CART_RETRIEVE_REQUEST,
+  CART_RETRIEVE_SUCCESS,
+} from '../utils/constants';
 import Router from 'next/router';
-
+import Loading from './ShopLoading';
+import Image from 'next/image';
+import logo from "/images/Logo.png"
+import { theme } from '/utils/styles';
 export default function Home(props) {
-  const useStyles = makeStyles(styles);
-
-  const { products } = props;
-  const [quantity, setQuantity] = useState(1);
 
   const classes = useStyles();
-
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
 
-  const addToCartHandler = async (product) => {
-    // const commerce = getCommerce(props.commercePublicKey);
-    const lineItem = cart.data.line_items.find(
-      (x) => x.product_id === product.id
-    );
-
-    if (lineItem) {
-      const cartData = await commerce.cart.update(lineItem.id, {
-        quantity: quantity,
-      });
-      // const getCartData = async() =>{return cartData}
-      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData});
-      Router.push('/cart');
-    } else {
-      const cartData = await commerce.cart.add(product.id, quantity);
-      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData });
-      Router.push('/cart');
-    }
-  };
+  useEffect(() => {
+    const fetchCart = async () => {
+      dispatch({ type: CART_RETRIEVE_REQUEST });
+      await commerce.cart.retrieve().then(
+        (resp) => {
+          dispatch({ type: CART_RETRIEVE_SUCCESS, payload: resp });
+        }
+      );
+    };
+    fetchCart();
+  }, []);
   return (
-    <Layout title="Shop" commercePublicKey={props.commercePublicKey}>
-      {(cart.loading || cart === undefined) ? (
-        <LinearProgress color="secondary" />
-      ) : products.length === 0 ? (
-        <Alert icon={false} severity="error">
-          Come Back Later, Shop is closed.
-        </Alert>
-      ) : (
-      <div className={classes.container}>
-      <div >
-        {/* <h2>Just</h2> */}
-        <GridContainer>
-        {products && products.map((product) => 
-          <GridItem md={4} sm={4} key={product.id}>
-            <Card product  plain>
-              <CardHeader image plain>
-                <a href={`/products/${product.permalink}`}>
-                  <img src={product.image.url} alt="..." height='50%'/>
-                </a>
-                <div
-                  className={classes.coloredShadow}
-                  style={{
-                    backgroundImage: "url('/img/examples/gucci.jpg')",
-                    opacity: 1
-                  }}
-                />
-              </CardHeader>
-              <CardBody className={classes.textCenter} plain>
-                <Typography  variant='h2'style={{color: 'white', marginLeft: '25%'}} component="h2"><strong>{product.name}</strong></Typography>
-                <Typography style={{color: 'gray', justifyItems: 'center'}} variant='p'>
-                  {product.description.replace(/<[^>]*>?/gm, '')}
-                </Typography>
-              </CardBody>
-              <CardFooter plain>
-                <div className={classes.priceContainer}>
-                  <span className={classNames(classes.price, classes.priceOld)}>
-                    {" "}
-                    {/* ${product.price.formatted - 10.00} */}
-                  </span>
-                  <span className={classNames(classes.price, classes.priceOld)} style={{color: "white"}}>
-                    {" "}
-                    <strong>${product.price.formatted}</strong>
-                  </span>
-                </div>
-                <div className={classNames(classes.stats, classes.mlAuto)}>
+      // <Layout>
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
 
-                    <Button color="danger" onClick={()=>addToCartHandler(product)}>
-                      <AddShoppingCartSharp /> Add To Cart
-                    </Button>
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-        )}
-        </GridContainer>
-      </div>
-    </div>      
-      )}
-      {/* <div className={classes.container}>
-      <GridContainer> 
-        {products && products.map((product) =>(
-        <GridItem lg={9} md={7} sm={12} xs={12}>
-          <Link href={`/products/${product.permalink}`}>
-          <Card plain product>
-            <CardHeader  image style={{height: '75%'}}>
-              <a href={`/products/${product.permalink}`}>
-                <img src={product.image.url} alt=".." className={classes.largeImage}/>
-              </a>
-            </CardHeader>
-            <CardBody plain>
-              <a href={`/products/${product.permalink}`}>
-                <h3 className="" style={{color: 'white'}}>{product.name}</h3>
-              </a>
-              <Typography dangerouslySetInnerHTML={{ __html: product.description }} variant="body2" color="textSecondary" style={{color: 'white'}}component="h4" />
-            </CardBody>
-            <CardFooter plain className={classes.justifyContentBetween}>
-              <div className={classes.priceContainer}>
-                <span className={classes.price}><h2>{product.name}</h2></span>
+      <div style={{backgroundColor: 'black'}}>
+        <div style={{    
+            margin: "100px auto",
+            padding: "0px",
+            maxWidth: "360px",
+            textAlign: "center",
+            position: "relative",
+            zIndex: "9999",
+            top: "0"
+          }}>
+          <Image src={logo} width="600px" height="400px" alt="name"/>
+          {(cart.loading) ? (
+              <div className={classes.container}>
+                <CircularProgress color='secondary'/>
               </div>
-              <div className={classNames(classes.stats, classes.mlAuto)}>
-              <Button simple color="danger">
-                <AddShoppingCartSharp/> 
-              </Button>
-              
-          </div>
-            </CardFooter>
-          </Card>
-          </Link>
-        </GridItem>
-        ))}
-      </GridContainer>
-      </div> */}
-    </Layout>
+            ) : (
+            <Button href="/shop" color="success" >
+              Shop
+            </Button>
+            )}
+        </div>
+        <Container maxWidth="lg" component="footer">
+            <Box mt={5}>
+              <Typography variant="body2" style={{color: "white"}} align="center">
+                © {new Date().getFullYear()} Yuck StreetWear LLC.
+              </Typography>
+            </Box>
+          </Container>
+
+      </div>
+    </ThemeProvider>
   );
 }
-
 export async function getStaticProps() {
 
   const { data: products } = await commerce.products.list();

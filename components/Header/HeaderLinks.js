@@ -123,44 +123,40 @@ export default function HeaderLinks(props) {
   const classes = useStyles();
   return (
     <>
-    <List className={classes.list + " " + classes.mlAuto}>
-    <ListItem className={classes.listItem}>
-      <Button color="transparent" href="/" className={classes.navLink}>
-        {/* <Email/> */}
-        <p><strong>Shop</strong></p>
-      </Button>
-    </ListItem>
-    <ListItem className={classes.listItem}>
-      <Button color="transparent" href="/" className={classes.navLink}>
-        {/* <Email/> */}
-        <p><strong>INFO</strong></p>
-      </Button>
-    </ListItem>
-    <ListItem className={classes.listItem}>
-      {/* <Button color="transparent" className={classes.navLink} > */}
-        {cart.data && cart.loading ? (
-          <>
-            <Button simple color={"secondary"}>
-              <ShoppingCartSharp/>  
-            </Button>
-          </>
-        ) : cart.data !== undefined ? (
-          <Button simple color={"secondary"} href='/cart'>
+      <List className={classes.list + " " + classes.mlAuto}>
+      <ListItem className={classes.listItem}>
+        <Button color="transparent" href="/shop" className={classes.navLink}>
+          <strong>Shop</strong>
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button color="transparent" href="/info" className={classes.navLink}>
+          <strong>INFO</strong>
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+          {cart.data && cart.loading ? (
+            <>
+              <Button simple color={"secondary"} className={classes.navLink}>
+                <ShoppingCartSharp/>  
+              </Button>
+            </>
+          ) : cart.data !== undefined ? (
+            <Button simple color={"secondary"} href='/cart' className={classes.navLink}>
 
-            <Badge badgeContent={cart.data.total_items} color="secondary">
-              <ShoppingCartSharp/>  
-            </Badge>
-          </Button>
-        ) : (
-          <>
-          <Button simple color={"secondary"}>
-          <ShoppingCartSharp/>  
-          </Button>          </>
-            )}
-      {/* </Button> */}
-    </ListItem>
-  </List>
-  </>
+              <Badge badgeContent={cart.data.total_items} color="secondary">
+                <ShoppingCartSharp/>  
+              </Badge>
+            </Button>
+          ) : (
+            <>
+            <Button simple color={"secondary"} className={classes.navLink}>
+            <ShoppingCartSharp/>  
+            </Button>          </>
+              )}
+      </ListItem>
+      </List>
+    </>
 
   );
 }
