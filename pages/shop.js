@@ -52,7 +52,7 @@ import Router from 'next/router';
 import Loading from './ShopLoading';
 import { useStyles } from '/utils/styles';
 import useSound from 'use-sound';
-import track from '/Users/aaron/next-netlify-starter/public/assets/musictrack.mp3';
+import track from '/public/assets/musictrack.mp3';
 import { PauseCircleFilled, PlayCircleFilled, StopOutlined } from '@material-ui/icons';
 
 
