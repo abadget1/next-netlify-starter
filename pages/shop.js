@@ -120,7 +120,7 @@ export default function Shop(props) {
             <GridItem lg={4} md={6} sm={12} xs={12} key={product.permalink}>
               <Card product plain>
                 <CardHeader image plain>
-                  <a href={`/products/${product.name}`} >
+                  <a href={`/products/${product.permalink}`} >
                     <img src={product.image.url} alt="..." height='50%'/>
                   </a>
                   <div
