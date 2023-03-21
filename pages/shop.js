@@ -88,18 +88,19 @@ export default function Shop(props) {
   });
   const pause = () => {exposedData.stop()};
 
-const muteButton = () => {
+  const muteButton = () => {
 
-  if(playing === true){
-    pause();
-    setPlaying(false); 
+    if(playing === true){
+      pause();
+      setPlaying(false); 
+    }
+
+    if(playing === false){
+      play()
+      setPlaying(true); 
+    }
   }
 
-  if(playing === false){
-    play()
-    setPlaying(true); 
-  }
-}
 
   return (
     <Layout title="Shop" commercePublicKey={props.commercePublicKey}>
@@ -116,10 +117,10 @@ const muteButton = () => {
         <div>
           <GridContainer>
           {products && products.map((product) => 
-            <GridItem lg={4} md={6} sm={12} xs={12} key={product.id}>
+            <GridItem lg={4} md={6} sm={12} xs={12} key={product.permalink}>
               <Card product plain>
                 <CardHeader image plain>
-                  <a href={`/products/${product.permalink}`} >
+                  <a href={`/products/${product.name}`} >
                     <img src={product.image.url} alt="..." height='50%'/>
                   </a>
                   <div
@@ -142,7 +143,7 @@ const muteButton = () => {
                     </span>
                     <span className={classNames(classes.price, classes.priceOld)} style={{color: "white"}}>
                       {" "}
-                      <strong>${product.price.formatted}</strong>
+                      <strong>{product.price.formatted_with_symbol}</strong>
                     </span>
                   </div>
                   <div className={classNames(classes.stats, classes.mlAuto)}>
