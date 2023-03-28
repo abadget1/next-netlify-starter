@@ -1,15 +1,6 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-// import {
-//   Box,
-//   Card,
-//   CardActionArea,
-//   CardContent,
-//   CardMedia,
-//   Grid,
-//   Slide,
-//   Typography,
-// } from '@material-ui/core';
+
 import { Alert } from '@material-ui/lab';
 import Layout from '../components/Layout';
 import {commerce} from '../utils/commerce';
