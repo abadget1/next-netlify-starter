@@ -38,7 +38,7 @@ import dynamic from 'next/dynamic';
 // import { Store } from '/components/Store';
 // import { CART_RETRIEVE_SUCCESS, ORDER_SET } from '/utils/constants';
 // import Router from 'next/router';
-// import { PreOrderConfirmation } from './PreOrderConfirmation';
+
 
 // const dev = process.env.NODE_ENV === 'development';
 function Checkout(props) {

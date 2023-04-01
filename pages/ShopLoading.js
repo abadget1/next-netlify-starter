@@ -54,57 +54,7 @@ const Welcome = () => {
   const { state, dispatch } = useContext(Store);
   return (
     <div>
-      <GridContainer>
-        <GridItem lg={4} md={6} sm={12} xs={12} >
-          <Box sx={{ width: '100%', bgcolor: "#2B2B2B" }}>                
-            <Card product plain>
-              <CardHeader image plain>
-                <Box sx={{ width: '100%' }}>                
-                  <Skeleton 
-                    animation="wave" 
-                    height="35vh"
-                    width="100%"   
-                    variant="rounded"
-                  />
-                </Box>
-              </CardHeader>
-              <CardBody>
-                <Box sx={{ width: '100%'}}>                
-                  <Skeleton 
-                    animation="wave" 
-                    height={"5vh"} 
-                    width="70%"   
-                    variant="text"  
-                    sx={{ bgcolor: 'grey.900' }}
-                  />              
-                </Box>
-                <Box sx={{ width: '100%'}}>                
-                  <Skeleton 
-                    animation="wave" 
-                    height={"5vh"} 
-                    width="40%"   
-                    variant="text"
-                  />              
-                </Box>
-              </CardBody>
-              <CardFooter >
-                
-              <Box sx={{ width: '100%',  } }>                
-                <Skeleton 
-                  animation="wave" 
-                  height={40} 
-                  width="100%"   
-                  variant="rect"
-                  sx={{ bgcolor: 'grey.400' }}
-                  style={{ }} 
-                />   
-                          
-              </Box>
-              </CardFooter>
-            </Card>
-          </Box>
-        </GridItem>
-      </GridContainer>
+      <LinearProgress/>
     </div>
   )
 }

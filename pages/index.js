@@ -11,6 +11,7 @@ import { useContext, useState } from 'react';
 import Image from 'next/image';
 import logo from "/images/Logo.png"
 import { theme } from '/utils/styles';
+import Link from 'next/link.js';
 
 
 export default function Home() {
@@ -42,9 +43,11 @@ export default function Home() {
         >
           <Image src={logo} width="600px" height="400px" alt="name" />
           {showButton ? (
-            <Button href="/shop" color="success">
+            <Link href="/shop">
+              <Button color="success">
               Shop
-            </Button>
+              </Button>
+            </Link>
           ) : (
             <div className={classes.container}>
               <CircularProgress color="secondary" />

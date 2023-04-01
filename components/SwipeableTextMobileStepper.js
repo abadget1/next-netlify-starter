@@ -37,14 +37,14 @@ function SwipeableTextMobileStepper(props) {
       <AutoPlaySwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
         {images.map((step, index) => (
           <div key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? (
+            {Math.abs(activeStep - index) <= 1 ? (
               <Box
                 component={"img"}
                 sx={{
                   display: 'block',
-                  maxWidth: '100%',
-                  maxHeight: '600px',
-                  overflow: 'hidden',
+                  width: 'auto',
+                  height: '600px',
+                  // overflow: 'hidden',
                   marginLeft: 'auto',
                   marginRight: 'auto',
                 }}

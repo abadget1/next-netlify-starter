@@ -67,18 +67,18 @@ export default function HeaderLinks(props) {
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      // const commerce = getCommerce(commercePublicKey);
-      dispatch({ type: CART_RETRIEVE_REQUEST });
-      await commerce.cart.retrieve().then(
-        (resp) => {
-          dispatch({ type: CART_RETRIEVE_SUCCESS, payload: resp });
-        }
-      );
-    };
-    fetchCart();
-  }, []);
+  // useEffect(() => {
+  //   const fetchCart = async () => {
+  //     // const commerce = getCommerce(commercePublicKey);
+  //     dispatch({ type: CART_RETRIEVE_REQUEST });
+  //     await commerce.cart.retrieve().then(
+  //       (resp) => {
+  //         dispatch({ type: CART_RETRIEVE_SUCCESS, payload: resp });
+  //       }
+  //     );
+  //   };
+  //   fetchCart();
+  // }, []);
 
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
@@ -125,34 +125,44 @@ export default function HeaderLinks(props) {
     <>
       <List className={classes.list + " " + classes.mlAuto}>
       <ListItem className={classes.listItem}>
-        <Button color="transparent" href="/shop" className={classes.navLink}>
+        <Link href="/shop">
+        <Button color="transparent"  className={classes.navLink}>
           <strong>Shop</strong>
         </Button>
+        </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button color="transparent" href="/info" className={classes.navLink}>
+        <Link href="/info">
+        <Button color="transparent" className={classes.navLink}>
           <strong>INFO</strong>
         </Button>
+        </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
           {cart.data && cart.loading ? (
             <>
+            <Link href="/cart">
               <Button simple color={"secondary"} className={classes.navLink}>
                 <ShoppingCartSharp/>  
               </Button>
+              </Link>
             </>
           ) : cart.data !== undefined ? (
-            <Button simple color={"secondary"} href='/cart' className={classes.navLink}>
-
+            <Link href="/cart">
+            <Button simple color={"secondary"}  className={classes.navLink}>
               <Badge badgeContent={cart.data.total_items} color="secondary">
                 <ShoppingCartSharp/>  
               </Badge>
             </Button>
+            </Link>
           ) : (
             <>
+            <Link href="/cart">
             <Button simple color={"secondary"} className={classes.navLink}>
             <ShoppingCartSharp/>  
-            </Button>          </>
+            </Button>          
+            </Link>
+            </>
               )}
       </ListItem>
       </List>

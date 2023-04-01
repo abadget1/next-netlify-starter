@@ -66,7 +66,7 @@ export default function Layout({
         <CssBaseline />
           <Header
             brand="Yuck Street Wear"
-            color="dark"
+            color="transparent"
             links={
               <HeaderLinks dropdownHoverColor={"dark"}/>
             }

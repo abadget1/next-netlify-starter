@@ -49,11 +49,12 @@ import { useContext, useState } from 'react';
 import { Store } from '/components/Store';
 import { CART_RETRIEVE_SUCCESS } from '/utils/constants';
 import Router from 'next/router';
-import Loading from './ShopLoading';
+
 import { useStyles } from '/utils/styles';
 import useSound from 'use-sound';
 import track from '/public/assets/musictrack.mp3';
 import { PauseCircleFilled, PlayCircleFilled, StopOutlined } from '@material-ui/icons';
+import ProductList from '@components/ProductList';
 
 
 
@@ -104,60 +105,8 @@ export default function Shop(props) {
 
   return (
     <Layout title="Shop" commercePublicKey={props.commercePublicKey}>
-      {(cart.loading || cart === undefined) ? (
-        <div className={classes.container}>
-          <Loading/>      
-        </div>
-      ) : products.length === 0 ? (
-        <Alert icon={false} severity="error">
-          Come Back Later, Shop is closed.
-        </Alert>
-      ) : (
-      <div className={classes.container}>
+        <ProductList products={props.products} />
         <div>
-          <GridContainer>
-          {products && products.map((product) => 
-            <GridItem lg={4} md={6} sm={12} xs={12} key={product.permalink}>
-              <Card product plain>
-                <CardHeader image plain>
-                  <a href={`/products/${product.permalink}`} >
-                    <img src={product.image.url} alt="..." height='50%'/>
-                  </a>
-                  <div
-                    className={classes.coloredShadow}
-                    style={{
-                      opacity: 1
-                    }}
-                  />
-                </CardHeader>
-                <CardBody className={classes.textCenter} plain>
-                  <Typography  variant='h2'style={{color: 'white'}} component="h2"><strong>{product.name}</strong></Typography>
-                  <Typography style={{color: 'gray', justifyItems: 'center'}} variant='body2'>
-                    {product.description.replace(/<[^>]*>?/gm, '')}
-                  </Typography>
-                </CardBody>
-                <CardFooter plain>
-                  <div className={classes.priceContainer}>
-                    <span className={classNames(classes.price, classes.priceOld)}>
-                      {" "}
-                    </span>
-                    <span className={classNames(classes.price, classes.priceOld)} style={{color: "white"}}>
-                      {" "}
-                      <strong>{product.price.formatted_with_symbol}</strong>
-                    </span>
-                  </div>
-                  <div className={classNames(classes.stats, classes.mlAuto)}>
-                      <Button color="danger" onClick={()=>addToCartHandler(product)}>
-                        <AddShoppingCartSharp /> Add To Cart
-                      </Button>
-                  </div>
-                </CardFooter>
-              </Card>
-            </GridItem>
-          )}
-          </GridContainer>
-          </div>
-          <div>
             <div style={{
                       display:"flex",
                       justifyContent:"center",
@@ -191,9 +140,7 @@ export default function Shop(props) {
               </Button>
 
             </div>
-          </div>
-      </div>      
-      )}
+        </div>
     </Layout>
   );
 }

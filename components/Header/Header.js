@@ -28,7 +28,6 @@ const useStyles = makeStyles(styles);
 export default function Header(props) {
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
-
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const classes = useStyles();
   
@@ -74,9 +73,6 @@ export default function Header(props) {
   });
   return (
     <>
-    {/* {cart.loading || cart === undefined ? (<LinearProgress color="secondary" 
-    // style={{marginTop: "-20px" }}
-    />) : <></>} */}
     <AppBar className={appBarClasses} >
       <Toolbar className={classes.container} >
         <Button className={classes.title}>
@@ -133,9 +129,6 @@ export default function Header(props) {
         </Hidden>
       </Toolbar>
     </AppBar>
-    {cart.loading || cart === undefined ? (<LinearProgress color="secondary" 
-    style={{marginTop: "-20px" }}
-    />) : <></>}
 
     </>
   );
