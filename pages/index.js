@@ -3,7 +3,6 @@ import Button from "../components/CustomButtons/Button.js";
 
 import styles from "/styles/jss/nextjs-material-kit-pro/pages/ecommerceSections/productsStyle.js";
 
-
 import { Box, CircularProgress, ThemeProvider, Container, CssBaseline, LinearProgress, Typography } from '@material-ui/core';
 
 import { useContext, useState } from 'react';
