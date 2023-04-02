@@ -35,25 +35,31 @@ function SwipeableTextMobileStepper(props) {
   return (
     <Box sx={{ maxWidth: '100%', flexGrow: 1 }}>
       <AutoPlaySwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
-        {images.map((step, index) => (
-          <div key={step.label}>
-            {Math.abs(activeStep - index) <= 1 ? (
-              <Box
-                component={"img"}
-                sx={{
-                  display: 'block',
-                  width: 'auto',
-                  height: '600px',
-                  // overflow: 'hidden',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                }}
-                src={step.url}
-                alt={step.id}
-              />
-            ) : null}
-          </div>
-        ))}
+      {images.map((step, index) => (
+  <div key={step.label}>
+    {Math.abs(activeStep - index) <= 1 ? (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '600px',
+        }}
+      >
+        <img
+          style={{
+            width: '500px',
+            height: '600px',
+            objectFit: 'contain',
+          }}
+          src={step.url}
+          alt={step.id}
+        />
+      </Box>
+    ) : null}
+  </div>
+))}
+
       </AutoPlaySwipeableViews>
       <MobileStepper
       style={{color: "white"}}

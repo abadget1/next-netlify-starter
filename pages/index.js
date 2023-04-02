@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div style={{ backgroundColor: "black" }}>
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <div
           style={{
             margin: "100px auto",
@@ -53,17 +53,14 @@ export default function Home() {
             </div>
           )}
         </div>
-        <Container maxWidth="lg" component="footer">
-          <Box mt={5}>
-            <Typography
-              variant="body2"
-              style={{ color: "white" }}
-              align="center"
-            >
-              © {new Date().getFullYear()} Yuck StreetWear LLC.
-            </Typography>
-          </Box>
-        </Container>
+        <Container maxWidth="lg" component="footer" style={{ marginTop: "auto" }}>
+              <Box mt={5}>
+                <Typography variant="body2" style={{color: "white", padding: '4%'}} align="center">
+                  © {new Date().getFullYear()} Yuck Streetwear LLC.
+                </Typography>
+              </Box>
+            </Container>
+
       </div>
     </ThemeProvider>
   );

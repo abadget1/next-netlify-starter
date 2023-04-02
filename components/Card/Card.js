@@ -48,7 +48,6 @@ export default function Card(props) {
     </div>
   );
 }
-
 Card.propTypes = {
   className: PropTypes.string,
   plain: PropTypes.bool,

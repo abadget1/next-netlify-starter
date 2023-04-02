@@ -3,17 +3,11 @@ import React, { useContext, useEffect } from 'react';
 import {
   ThemeProvider,
   CssBaseline,
-  // AppBar,
-  // Toolbar,
-  // Link,
+
   Container,
   Box,
-  Button,
   Typography,
-  // CircularProgress,
-  // Badge,
-  // List,
-  // ListItem,
+
 } from '@material-ui/core';
 
 import { theme, useStyles } from '../utils/styles';
@@ -55,7 +49,7 @@ export default function Layout({
     <React.Fragment>
       <Head>
         <meta charSet="utf-8" />
-        <title>{`${title} - Yuck Street Wear`}</title>
+        <title>{`${title} - Yuck Streetwear`}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="viewport"
@@ -64,23 +58,25 @@ export default function Layout({
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-          <Header
-            brand="Yuck Street Wear"
-            color="transparent"
-            links={
-              <HeaderLinks dropdownHoverColor={"dark"}/>
-            }
-          />
-          <Container component="main" className={classes.main}>
-            {children}
-          </Container>
-          <Container maxWidth="lg" component="footer">
-            <Box mt={5}>
-              <Typography variant="body2" style={{color: "white"}} align="center">
-                © {new Date().getFullYear()} Yuck StreetWear LLC.
-              </Typography>
-            </Box>
-          </Container>
+          <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+            <Header
+              brand="Yuck Streetwear"
+              color="transparent"
+              links={
+                <HeaderLinks dropdownHoverColor={"dark"}/>
+              }
+            />
+            <Container component="main" className={classes.main} style={{ flex: 1 }}>
+              {children}
+            </Container>
+            <Container maxWidth="lg" component="footer" style={{ marginTop: "auto" }}>
+              <Box mt={5}>
+                <Typography variant="body2" style={{color: "white", padding: '4%'}} align="center">
+                  © {new Date().getFullYear()} Yuck Streetwear LLC.
+                </Typography>
+              </Box>
+            </Container>
+          </div>
       </ThemeProvider>
     </React.Fragment>
   );

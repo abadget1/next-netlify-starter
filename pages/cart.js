@@ -105,7 +105,6 @@ function Cart(props) {
               <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
                 <TableContainer>
                   <Table aria-label="Orders" size="large" stickyHeader="true" >
-
                     <TableBody >
                       {cart.data.line_items.map((cartItem) => (
                         <TableRow key={cartItem.id} style={{color:"white", border: 0, align: "center" }}>
